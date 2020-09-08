@@ -82,7 +82,7 @@ app.post('/buscar', (req, res) => {
     Promise.all([
         buscarLogin(busqueda, regex), //TODO Cris
         buscarHabilitador(busqueda, regex), //TODO Cris
-        buscarFormador(busquede, regex), //TODO John
+        buscarFormador(busqueda, regex), //TODO John
         buscarCompetencia(busqueda, regex) //TODO John
     ]).then(respuestas => {
         res.status(200).json({
@@ -115,41 +115,26 @@ function buscarHabilitador(habilitador, regex) {
     })
 }
 
-function buscarFormador(formador, regex){
-    return new Promise ((resolve, reject) =>{
-        Formacion.find({formador:regex},(err,formaciones) =>{
-            if(err) reject(formaciones);
-            resolve(formaciones);   
-
-        })
-    })
-
-}
-
-function buscarCompetencia(competencia, regex){
-    return new Promise ((resolve, reject) =>{
-        Formacion.find({competencias:regex},(err,formaciones) =>{
-            if(err) reject(formaciones);
-            resolve(formaciones);   
-
-        })
-    })
-
-}
-
-
-/* function buscarHospitales(busqueda, regex) {
+function buscarFormador(formador, regex) {
     return new Promise((resolve, reject) => {
-        Hospital.find({ nombre: regex })
-            .populate('usuario', 'nombre correo')
-            .exec((err, hospitales) => {
-                if (err) {
-                    reject("Error al buscar hospitales", err);
-                } else {
-                    resolve(hospitales);
-                }
-            });
-    });
-} */
+        Formacion.find({ formador: regex }, (err, formaciones) => {
+            if (err) reject(formaciones);
+            resolve(formaciones);
+
+        })
+    })
+
+}
+
+function buscarCompetencia(competencia, regex) {
+    return new Promise((resolve, reject) => {
+        Formacion.find({ competencias: regex }, (err, formaciones) => {
+            if (err) reject(formaciones);
+            resolve(formaciones);
+
+        })
+    })
+
+}
 
 module.exports = app;

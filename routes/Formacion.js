@@ -137,4 +137,31 @@ function buscarCompetencia(competencia, regex) {
 
 }
 
+app.get('/buscar/:id', (req, res) =>
+
+    {
+        const busqueda = req.params.id;
+        var regex = new RegExp(busqueda, 'i');
+
+
+
+        Formacion.find({ login: regex }, (err, formaciones) => {
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    message: 'No sé encontró la formación'
+                })
+            } else {
+                return res.status(200).json({
+                    ok: true,
+                    mensaje: "Correcto",
+                    datos: formaciones
+                })
+            }
+
+        })
+
+
+    });
+
 module.exports = app;

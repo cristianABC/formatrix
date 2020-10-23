@@ -3,9 +3,12 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var llaves = require('./llaves.js');
 var cors = require('cors');
+var path = require('path');
 
 
 var app = express();
+
+app.use(express.static(__dirname + '/dist/formatrix'));
 
 app.use(cors());
 app.use(function(req, res, next) {
@@ -33,6 +36,11 @@ mongoose.connection.openUri(llaves.configuración,
         if (err) throw err;
         console.log('BD corriendo: \x1b[32m%s\x1b[0m', 'online')
     })
+
+//Home angular
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/formatrix/index.html'));
+});
 
 //Peticiones    
 app.listen(process.env.PORT || 3000, () => { console.log('Express server corriendo en puerto 3000: \x1b[32m%s\x1b[0m', 'online'); })

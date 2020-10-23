@@ -54,7 +54,8 @@ app.post('/', (req, res) => {
         competencias,
         fechaSeguimiento,
         acuerdos,
-        habilitadores
+        habilitadores,
+        facultad
     });
 
     forma.save((err, formacionGuardada) => {

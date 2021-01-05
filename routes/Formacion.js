@@ -42,7 +42,7 @@ app.get('/', (req, res) =>
 
 app.post('/', (req, res) => {
     var body = req.body;
-    const { login, formador, competencias, fechaSeguimiento, acuerdos, habilitadores } = body
+    const { login, formador, competencias, fechaSeguimiento, acuerdos, habilitadores, facultad } = body
     const date = Date.now();
 
 
